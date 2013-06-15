@@ -8,19 +8,24 @@ PiSimulation::PiSimulation(int samples) : samples_(samples),
 {
 }
 
+void PiSimulation::sample()
+{
+    double x = unif_(mt_);
+    double y = unif_(mt_);
+
+    if (x*x + y*y <= 1.0)
+    {
+        ++inside_;
+    }
+
+    ++total_;
+}
+
 void PiSimulation::operator()()
 {
     for (int i = 0; i < samples_; ++i)
     {
-        double x = unif_(mt_);
-        double y = unif_(mt_);
-
-        if (x*x + y*y <= 1.0)
-        {
-            ++inside_;
-        }
-
-        ++total_;
+        sample();
     }
 }
 

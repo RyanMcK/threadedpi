@@ -5,6 +5,7 @@ class PiSimulation
 public:
     PiSimulation(int samples);
 
+    void sample();
     void operator()();
     double get_pi();
 
