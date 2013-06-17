@@ -15,6 +15,9 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#ifndef PISIMULATION_HPP
+#define PISIMULATION_HPP
+
 #include <random>
 
 class PiSimulation
@@ -22,14 +25,18 @@ class PiSimulation
 public:
     PiSimulation(int samples);
 
-    void sample();
     void operator()();
     double get_pi();
 
 private:
+    void sample();
+
     int samples_;
     std::mt19937 mt_;
     std::uniform_real_distribution<> unif_;
     int inside_;
     int total_;
 };
+
+#endif
+
