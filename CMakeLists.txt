@@ -8,7 +8,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 find_package(Boost COMPONENTS program_options unit_test_framework REQUIRED)
 include_directories(${Boost_INCLUDE_DIR})
 
-add_definitions(-std=c++11 -O3)
+add_definitions(-Wall -Wextra -pedantic -std=c++11 -O3)
 add_executable(threadedpi src/threadedpi.cpp src/pisimulation.cpp)
 target_link_libraries(threadedpi ${Boost_LIBRARIES})
 
