@@ -20,15 +20,41 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <random>
 
+/**
+@mainpage
+
+Please use the menu above to view available classes and files.
+*/
+
+/**
+Self-contained class for approximating pi in a finite number of Monte Carlo
+samples.
+*/
 class PiSimulation
 {
 public:
+    /**
+    @param samples Number of Monte Carlo samples to perform.
+    */
     PiSimulation(int samples);
 
+    /**
+    Actually perform the Monte Carlo routine using the number of samples
+    provided during construction.
+    @see sample()
+    */
     void operator()();
+
+    /**
+    @return The approximation of pi obtained via sampling.
+    */
     double get_pi();
 
 private:
+    /**
+    Pick a random point in the unit square and determine whether it lies in
+    the unit circle.  Store the results.
+    */
     void sample();
 
     int samples_;
