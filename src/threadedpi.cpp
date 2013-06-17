@@ -16,23 +16,50 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include <iostream>
-#include <sstream>
 #include <thread>
 #include <vector>
 
-//#include <boost/program_options.hpp>
+#include <boost/program_options.hpp>
 
 #include "pisimulation.hpp"
+
+namespace po = boost::program_options;
 
 int main(int argc, char* argv[])
 {
     int num_samples;
     int num_threads;
 
-    std::istringstream ss1(argv[1]);
-    ss1 >> num_samples;
-    std::istringstream ss2(argv[2]);
-    ss2 >> num_threads;
+    po::options_description desc("Allowed options");
+    desc.add_options()
+        ("help,h", "print help message")
+        ("num_samples,s", po::value<int>(&num_samples)->required(),
+            "number of samples per thread")
+        ("num_threads,t", po::value<int>(&num_threads)->required(),
+            "number of threads");
+
+    po::variables_map vm;
+
+    try
+    {
+        po::store(po::parse_command_line(argc, argv, desc), vm);
+
+        if (vm.count("help"))
+        {
+            std::cout << "Threaded Pi" << std::endl << std::endl;
+            std::cout << desc << std::endl;
+
+            return 0;
+        }
+
+        po::notify(vm);
+    }
+    catch (po::error& e)
+    {
+        std::cerr << "ERROR: " << e.what() << std::endl << std::endl;
+        std::cerr << desc << std::endl;
+        return 1;
+    }
 
     std::vector<PiSimulation> simulations(num_threads,
                                           PiSimulation(num_samples));
