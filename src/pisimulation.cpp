@@ -18,10 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "pisimulation.hpp"
 
 PiSimulation::PiSimulation(int samples) : samples_(samples),
-                                          mt_(std::random_device()()),
-                                          unif_(0.0, 1.0),
                                           inside_(0),
-                                          total_(0)
+                                          mt_(std::random_device()()),
+                                          unif_(0.0, 1.0)
 {
 }
 
@@ -36,7 +35,7 @@ void PiSimulation::operator()()
 
 double PiSimulation::get_pi()
 {
-    return (4.0 * inside_) / total_;
+    return (4.0 * inside_) / samples_;
 }
 
 void PiSimulation::sample()
@@ -48,7 +47,5 @@ void PiSimulation::sample()
     {
         ++inside_;
     }
-
-    ++total_;
 }
 

@@ -58,10 +58,9 @@ private:
     void sample();
 
     int samples_;
+    int inside_;
     std::mt19937 mt_;
     std::uniform_real_distribution<> unif_;
-    int inside_;
-    int total_;
 };
 
 #endif
