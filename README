@@ -1,0 +1,25 @@
+This is a simple application that calculates pi in a multithreaded fashion by 
+sampling points inside of the unit square and determining if they land in the 
+unit circle.  It was just an opportunity for me to experiment with C++11's 
+threading capabilities.
+
+For installation instructions, see INSTALL.
+
+Once compiled, you can run `threadedpi --help` to see available options:
+
+    $ ./threadedpi --help
+    Threaded Pi
+
+    Allowed options:
+      -h [ --help ]            print help message
+      -s [ --num_samples ] arg number of samples per thread
+      -t [ --num_threads ] arg number of threads
+
+In short, the command `threadedpi -s 1000000 -t 4` will execute the program,
+using four threads and sampling one million points in each thread.  The 
+approximation to pi will be recorded:
+
+    $ ./threadedpi -s 1000000 -t 4
+    3.14163
+
+Ryan McKinnon
